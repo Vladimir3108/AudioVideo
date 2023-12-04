@@ -13,5 +13,6 @@ namespace AudioVideo
     /// </summary>
     public partial class App : Application
     {
+        public static VideoAudioSalonEntities3 AudioSalon { get; } = new VideoAudioSalonEntities3();
     }
 }

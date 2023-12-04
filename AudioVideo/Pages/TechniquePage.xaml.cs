@@ -13,17 +13,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AudioVideo
+namespace AudioVideo.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для TechniquePage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TechniquePage : Page
     {
-        public MainWindow()
+        public TechniquePage()
         {
+
             InitializeComponent();
-            FrameMain.Navigate(new Pages.LoginPage());
         }
     }
 }

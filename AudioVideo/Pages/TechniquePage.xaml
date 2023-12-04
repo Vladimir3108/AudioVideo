@@ -1,0 +1,35 @@
+﻿<Page x:Class="AudioVideo.Pages.TechniquePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AudioVideo.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TechniquePage">
+
+    <Grid>
+        <ListView x:Name="ListTechnique">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                                
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding TechniqueTypeID}"/>
+                                <TextBlock Text="{Binding ReceiptDate}"/>
+                                <TextBlock Text="{Binding Amount}"/>
+                                <TextBlock Text="{Binding SellingPrice}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
