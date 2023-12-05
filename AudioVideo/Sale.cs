@@ -18,7 +18,6 @@ namespace AudioVideo
         public int UserID { get; set; }
         public int CatalogID { get; set; }
         public decimal SumCheck { get; set; }
-        public Nullable<int> CardDiscount { get; set; }
         public System.DateTime DateOfSale { get; set; }
     
         public virtual Catalog Catalog { get; set; }

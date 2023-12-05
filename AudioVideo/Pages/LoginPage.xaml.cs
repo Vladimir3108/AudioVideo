@@ -25,10 +25,6 @@ namespace AudioVideo.Pages
             InitializeComponent();
         }
 
-        private void TBoxLogin_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
 
         private void BtnGuest_Click(object sender, RoutedEventArgs e)
         {
@@ -37,11 +33,11 @@ namespace AudioVideo.Pages
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
-            var currentUser = App.AudioSalon.User
-                .FirstOrDefault(p => p.Login == TBoxLogin.Text && p.Password == PBoxPassword.Password);
+            var currentUser = App.AudioSalon.User.Where(p => p.Login == TBoxLogin.Text && p.Password == PBoxPassword.Password)
+                .FirstOrDefault();
             if (currentUser != null)
             {
-                
+                App.CurrentUser= currentUser;
                 NavigationService.Navigate(new TechniquePage());
             }
             else

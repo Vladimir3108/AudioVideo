@@ -15,6 +15,7 @@
           <Property Name="ReceiptDate" Type="date" Nullable="false" />
           <Property Name="Amount" Type="int" Nullable="false" />
           <Property Name="SellingPrice" Type="int" Nullable="false" />
+          <Property Name="Image" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -31,7 +32,6 @@
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="CatalogID" Type="int" Nullable="false" />
           <Property Name="SumCheck" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="CardDiscount" Type="int" />
           <Property Name="DateOfSale" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -63,7 +63,7 @@
           <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="RoleID" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Catalog_DiskType">
+        <Association Name="FK_Catalog_TechniqueType">
           <End Role="TechniqueType" Type="Self.TechniqueType" Multiplicity="1" />
           <End Role="Catalog" Type="Self.Catalog" Multiplicity="*" />
           <ReferentialConstraint>
@@ -118,7 +118,7 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TechniqueType" EntityType="Self.TechniqueType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Catalog_DiskType" Association="Self.FK_Catalog_DiskType">
+          <AssociationSet Name="FK_Catalog_TechniqueType" Association="Self.FK_Catalog_TechniqueType">
             <End Role="TechniqueType" EntitySet="TechniqueType" />
             <End Role="Catalog" EntitySet="Catalog" />
           </AssociationSet>
@@ -150,7 +150,8 @@
           <Property Name="ReceiptDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Amount" Type="Int32" Nullable="false" />
           <Property Name="SellingPrice" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TechniqueType" Relationship="Self.FK_Catalog_DiskType" FromRole="Catalog" ToRole="TechniqueType" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="TechniqueType" Relationship="Self.FK_Catalog_TechniqueType" FromRole="Catalog" ToRole="TechniqueType" />
           <NavigationProperty Name="Sale" Relationship="Self.FK_Sale_Rental_Catalog" FromRole="Catalog" ToRole="Sale" />
         </EntityType>
         <EntityType Name="Role">
@@ -169,7 +170,6 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="CatalogID" Type="Int32" Nullable="false" />
           <Property Name="SumCheck" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="CardDiscount" Type="Int32" />
           <Property Name="DateOfSale" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Catalog" Relationship="Self.FK_Sale_Rental_Catalog" FromRole="Sale" ToRole="Catalog" />
           <NavigationProperty Name="User" Relationship="Self.FK_Sale_Rental_Client" FromRole="Sale" ToRole="User" />
@@ -190,7 +190,7 @@
           </Key>
           <Property Name="TechniqueTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Catalog" Relationship="Self.FK_Catalog_DiskType" FromRole="TechniqueType" ToRole="Catalog" />
+          <NavigationProperty Name="Catalog" Relationship="Self.FK_Catalog_TechniqueType" FromRole="TechniqueType" ToRole="Catalog" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -206,7 +206,7 @@
           <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
           <NavigationProperty Name="Sale" Relationship="Self.FK_Sale_Rental_Client" FromRole="User" ToRole="Sale" />
         </EntityType>
-        <Association Name="FK_Catalog_DiskType">
+        <Association Name="FK_Catalog_TechniqueType">
           <End Role="TechniqueType" Type="Self.TechniqueType" Multiplicity="1" />
           <End Role="Catalog" Type="Self.Catalog" Multiplicity="*" />
           <ReferentialConstraint>
@@ -254,14 +254,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="VideoAudioSalonEntities3" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="VideoAudioSalonEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Catalog" EntityType="Self.Catalog" />
           <EntitySet Name="Role" EntityType="Self.Role" />
           <EntitySet Name="Sale" EntityType="Self.Sale" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TechniqueType" EntityType="Self.TechniqueType" />
           <EntitySet Name="User" EntityType="Self.User" />
-          <AssociationSet Name="FK_Catalog_DiskType" Association="Self.FK_Catalog_DiskType">
+          <AssociationSet Name="FK_Catalog_TechniqueType" Association="Self.FK_Catalog_TechniqueType">
             <End Role="TechniqueType" EntitySet="TechniqueType" />
             <End Role="Catalog" EntitySet="Catalog" />
           </AssociationSet>
@@ -283,7 +283,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище VideoAudioSalonModelContainer" CdmEntityContainer="VideoAudioSalonEntities3">
+        <EntityContainerMapping StorageEntityContainer="Хранилище VideoAudioSalonModelContainer" CdmEntityContainer="VideoAudioSalonEntities">
           <EntitySetMapping Name="Catalog">
             <EntityTypeMapping TypeName="VideoAudioSalonModel.Catalog">
               <MappingFragment StoreEntitySet="Catalog">
@@ -293,6 +293,7 @@
                 <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -311,7 +312,6 @@
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="CatalogID" ColumnName="CatalogID" />
                 <ScalarProperty Name="SumCheck" ColumnName="SumCheck" />
-                <ScalarProperty Name="CardDiscount" ColumnName="CardDiscount" />
                 <ScalarProperty Name="DateOfSale" ColumnName="DateOfSale" />
               </MappingFragment>
             </EntityTypeMapping>

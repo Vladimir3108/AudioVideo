@@ -9,6 +9,10 @@
       Title="TechniquePage">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
         <ListView x:Name="ListTechnique">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -16,20 +20,26 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="*"/>
-                                
+                                <ColumnDefinition Width="420"/>
+                                <ColumnDefinition Width="200"/>
                             </Grid.ColumnDefinitions>
+                            <Image Source="{Binding CorrectImage}"/>
                             <StackPanel Grid.Column="1">
                                 <TextBlock Text="{Binding Name}"/>
-                                <TextBlock Text="{Binding TechniqueTypeID}"/>
-                                <TextBlock Text="{Binding ReceiptDate}"/>
-                                <TextBlock Text="{Binding Amount}"/>
+                                <TextBlock Text="{Binding TechniqueName}"/>
                                 <TextBlock Text="{Binding SellingPrice}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <Button x:Name="BtnEdit" Click="BtnEdit_Click" Content="Редактирование" Visibility="{Binding AdminVisibility}"/>
+                                <Button x:Name="BtnDelete" Click= "BtnDelete_Click"  Content="Удаление" Visibility="{Binding AdminVisibility}"/>
+                                
                             </StackPanel>
                         </Grid>
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button HorizontalAlignment="Left" Grid.Row="1" x:Name="BtnAdd" Click="BtnAdd_Click" Content="Добавление"/>
+        <Button HorizontalAlignment="Right" Grid.Row="1" x:Name="BtnBack" Click="BtnBack_Click" Content="Назад"/>
     </Grid>
 </Page>

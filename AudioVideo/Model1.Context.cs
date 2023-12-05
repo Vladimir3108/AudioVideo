@@ -13,10 +13,10 @@ namespace AudioVideo
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class VideoAudioSalonEntities3 : DbContext
+    public partial class VideoAudioSalonEntities : DbContext
     {
-        public VideoAudioSalonEntities3()
-            : base("name=VideoAudioSalonEntities3")
+        public VideoAudioSalonEntities()
+            : base("name=VideoAudioSalonEntities")
         {
         }
     

@@ -11,21 +11,17 @@
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Логин:"></TextBlock>
-                <TextBox Name="TBoxLogin" Width="253" TextChanged="TBoxLogin_TextChanged"></TextBox>
+                <TextBlock Width="75" Text="Логин:"></TextBlock>
+                <TextBox Name="TBoxLogin" Width="325" Margin="5"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Пароль:"></TextBlock>
-                <PasswordBox Name="PBoxPassword" Width="253"></PasswordBox>
+                <TextBlock Width="75" Text="Пароль:"></TextBlock>
+                <PasswordBox Name="PBoxPassword" Width="325" Margin="5"></PasswordBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Image Name="ImCapt" Visibility="Collapsed"></Image>
-                <TextBox HorizontalAlignment="Right" Visibility="Collapsed" Name="TBCapt"></TextBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Width="449">
-                <Button x:Name="BtnGuest" Click="BtnGuest_Click" Content="Войти как гость" Width="222" Height="55" />
+                <Button x:Name="BtnGuest" Click="BtnGuest_Click" Content="Войти как гость"   />
                 
-                <Button Name="BtnLogin" Click="BtnLogin_Click" Content="Войти" Width="268" Height="57"/>
+                <Button Name="BtnLogin" HorizontalContentAlignment="Center" Click="BtnLogin_Click" Content="Войти" />
             </StackPanel>
         </StackPanel>
     </Grid>

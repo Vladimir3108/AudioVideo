@@ -11,6 +11,7 @@ namespace AudioVideo
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     
     public partial class Catalog
     {
@@ -23,9 +24,36 @@ namespace AudioVideo
         public int CatalogID { get; set; }
         public string Name { get; set; }
         public int TechniqueTypeID { get; set; }
+        public string TechniqueName { 
+            get {
+                return TechniqueType.Type.ToString();
+            } 
+        }
         public System.DateTime ReceiptDate { get; set; }
         public int Amount { get; set; }
         public int SellingPrice { get; set; }
+        public byte[] Image { get; set; }
+        public byte[] CorrectImage
+        {
+            get
+            {
+                if (Image == null)
+                    return File.ReadAllBytes("../../Resources/Picture.png");
+                else return Image;
+            }
+        }
+
+        public string AdminVisibility
+        {
+            get
+            {
+                if (App.CurrentUser == null)
+                    return "Hidden";                
+                else if (App.CurrentUser.RoleID == 2)
+                    return "Hidden";
+                else return "Visible";
+            }
+        }
     
         public virtual TechniqueType TechniqueType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

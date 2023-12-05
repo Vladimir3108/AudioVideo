@@ -22,8 +22,37 @@ namespace AudioVideo.Pages
     {
         public TechniquePage()
         {
-
+            
             InitializeComponent();
+            ListTechnique.ItemsSource = App.AudioSalon.Catalog.ToList();
+            if(App.CurrentUser == null)
+                BtnAdd.Visibility = Visibility.Hidden;
+            else if (App.CurrentUser.RoleID == 2)
+                BtnAdd.Visibility = Visibility.Hidden;
+
+        }
+
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Вы уверены, что хотите вернуться назад?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                NavigationService.GoBack();
+            }
         }
     }
 }

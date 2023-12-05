@@ -6,20 +6,19 @@
     <Application.Resources>
             <SolidColorBrush x:Key="ColorAccent">
                 <SolidColorBrush.Color>
-                    <Color
-                    A="255"
-                    R="204"
-                    G="102"
-                    B="0" />
+                <Color>
+                    #0c54c7
+                </Color>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                        
                 </SolidColorBrush.Color>
             </SolidColorBrush>
             <SolidColorBrush x:Key="ColorSecondary">
                 <SolidColorBrush.Color>
-                    <Color
-                    A="255"
-                    R="255"
-                    G="204"
-                    B="153" />
+                <Color>
+                    #498af2
+                </Color>
+                    
                 </SolidColorBrush.Color>
             </SolidColorBrush>
             <SolidColorBrush x:Key="ColorPrimary">
@@ -41,7 +40,7 @@
                 <Setter Property="Height" Value="40"/>
                 <Setter Property="Margin" Value="5"/>
                 <Setter Property="Foreground" Value="{StaticResource ColorPrimary}"/>
-                <Setter Property="Background" Value="{StaticResource ColorAccent}"/>
+                <Setter Property="Background" Value="{StaticResource ColorSecondary}"/>
             </Style>
             <Style TargetType="TextBlock" x:Key="BlockHeader">
                 <Setter Property="Margin" Value="5"></Setter>
@@ -55,12 +54,11 @@
             <Style TargetType="TextBlock">
                 <Setter Property="Margin" Value="5"/>
                 <Setter Property="FontFamily" Value="Comic Sans MS"/>
-                <Setter Property="HorizontalAlignment" Value="Center"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
+                
                 <Setter Property="FontSize" Value="16"/>
                 <Setter Property="TextWrapping" Value="Wrap"/>
-                <Setter Property="Width" Value="100"/>
-                <Setter Property="TextAlignment" Value="Left"/>
+                
+                
             </Style>
         </Application.Resources>
 </Application>
