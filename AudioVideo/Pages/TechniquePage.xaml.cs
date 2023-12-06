@@ -65,5 +65,14 @@ namespace AudioVideo.Pages
                 NavigationService.GoBack();
             }
         }
+
+        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if(Visibility == Visibility.Visible)
+            {
+                VideoAudioSalonEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+                ListTechnique.ItemsSource = App.AudioSalon.Catalog.ToList();
+            }
+        }
     }
 }

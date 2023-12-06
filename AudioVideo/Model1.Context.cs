@@ -15,9 +15,16 @@ namespace AudioVideo
     
     public partial class VideoAudioSalonEntities : DbContext
     {
+        private static VideoAudioSalonEntities context;
         public VideoAudioSalonEntities()
             : base("name=VideoAudioSalonEntities")
         {
+        }
+        public static VideoAudioSalonEntities GetContext()
+        {
+            if(context==null)
+                context = new VideoAudioSalonEntities();
+            return context;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

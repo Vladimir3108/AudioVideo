@@ -94,7 +94,7 @@ namespace AudioVideo.Pages
 
             try
             {
-                App.AudioSalon.SaveChanges();
+                VideoAudioSalonEntities.GetContext().SaveChanges();
                 MessageBox.Show("Информация сохранена!");
                 NavigationService.GoBack();
             }
