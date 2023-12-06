@@ -39,6 +39,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Grid Grid.Row="1" Background="{StaticResource ColorAccent}"/>
         <Button HorizontalAlignment="Left" Grid.Row="1" x:Name="BtnAdd" Click="BtnAdd_Click" Content="Добавление"/>
         <Button HorizontalAlignment="Right" Grid.Row="1" x:Name="BtnBack" Click="BtnBack_Click" Content="Назад"/>
     </Grid>

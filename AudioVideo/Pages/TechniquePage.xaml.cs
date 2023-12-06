@@ -24,8 +24,8 @@ namespace AudioVideo.Pages
         {
             
             InitializeComponent();
-            ListTechnique.ItemsSource = App.AudioSalon.Catalog.ToList();
-            if(App.CurrentUser == null)
+            update();
+            if (App.CurrentUser == null)
                 BtnAdd.Visibility = Visibility.Hidden;
             else if (App.CurrentUser.RoleID == 2)
                 BtnAdd.Visibility = Visibility.Hidden;
@@ -34,17 +34,28 @@ namespace AudioVideo.Pages
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new AddEditPage((sender as Button).DataContext as Catalog));
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
+            var DelTech = (sender as Button).DataContext as Catalog;
+            if(MessageBox.Show($"Вы уверены ,что хотите удалить данный товар {DelTech.Name}?","Уведомление",MessageBoxButton.YesNo, MessageBoxImage.Question)==MessageBoxResult.Yes)
+            {
+                App.AudioSalon.Catalog.Remove(DelTech);
+                App.AudioSalon.SaveChanges();
+                update();
+            }
+        }
 
+        private void update()
+        {
+            ListTechnique.ItemsSource = App.AudioSalon.Catalog.ToList();
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new AddEditPage(null));
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)

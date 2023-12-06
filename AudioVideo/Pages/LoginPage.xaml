@@ -9,6 +9,10 @@
       Title="LoginPage">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Width="75" Text="Логин:"></TextBlock>
@@ -24,5 +28,6 @@
                 <Button Name="BtnLogin" HorizontalContentAlignment="Center" Click="BtnLogin_Click" Content="Войти" />
             </StackPanel>
         </StackPanel>
+        <Grid Grid.Row="1" Background="{StaticResource ColorAccent}"/>
     </Grid>
 </Page>

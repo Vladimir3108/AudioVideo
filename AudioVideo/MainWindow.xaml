@@ -9,12 +9,10 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
         </Grid.RowDefinitions>
         <Frame Grid.Row="1" x:Name="FrameMain" NavigationUIVisibility="Hidden"/>
         <Grid Background="{StaticResource ColorAccent}" />
         <Image Source="/Resources/Shop.png" HorizontalAlignment="Left"/>
-        <Grid Background="{StaticResource ColorAccent}" Grid.Row="2" />
     </Grid>
 </Window>
