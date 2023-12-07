@@ -12,15 +12,24 @@ namespace AudioVideo
     using System;
     using System.Collections.Generic;
     
-    public partial class Sale
+    public partial class Applications
     {
-        public int SaleID { get; set; }
+        public int ApplicationID { get; set; }
         public int UserID { get; set; }
         public int CatalogID { get; set; }
-        public decimal SumCheck { get; set; }
-        public System.DateTime DateOfSale { get; set; }
+        public string Description { get; set; }
+        public System.DateTime DateOfApplication { get; set; }
     
         public virtual Catalog Catalog { get; set; }
         public virtual User User { get; set; }
+        
+        public string Technique
+        {
+            get { return Catalog.Name.ToString(); }
+        }
+        public string Name { get 
+            {
+                return User.Name + " " + User.Patronymic;
+            } }
     }
 }

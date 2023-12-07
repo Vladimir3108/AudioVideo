@@ -4,17 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9355cfea9ead429b80bed1cfe58a5ac0" Name="Diagram1">
+      <Diagram DiagramId="90ab45721ed940788f6de0966e9d9222" Name="Diagram1">
+        <EntityTypeShape EntityType="VideoAudioSalonModel.Applications" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="VideoAudioSalonModel.Catalog" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="VideoAudioSalonModel.Role" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="VideoAudioSalonModel.Sale" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="VideoAudioSalonModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="VideoAudioSalonModel.TechniqueType" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="VideoAudioSalonModel.User" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="VideoAudioSalonModel.FK_Catalog_TechniqueType" ManuallyRouted="false" />
         <AssociationConnector Association="VideoAudioSalonModel.FK_Sale_Rental_Catalog" ManuallyRouted="false" />
-        <AssociationConnector Association="VideoAudioSalonModel.FK_User_Role" ManuallyRouted="false" />
         <AssociationConnector Association="VideoAudioSalonModel.FK_Sale_Rental_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoAudioSalonModel.FK_Catalog_TechniqueType" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoAudioSalonModel.FK_User_Role" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -15,16 +15,9 @@ namespace AudioVideo
     
     public partial class VideoAudioSalonEntities : DbContext
     {
-        private static VideoAudioSalonEntities context;
         public VideoAudioSalonEntities()
             : base("name=VideoAudioSalonEntities")
         {
-        }
-        public static VideoAudioSalonEntities GetContext()
-        {
-            if(context==null)
-                context = new VideoAudioSalonEntities();
-            return context;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -32,9 +25,9 @@ namespace AudioVideo
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Applications> Applications { get; set; }
         public virtual DbSet<Catalog> Catalog { get; set; }
         public virtual DbSet<Role> Role { get; set; }
-        public virtual DbSet<Sale> Sale { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TechniqueType> TechniqueType { get; set; }
         public virtual DbSet<User> User { get; set; }

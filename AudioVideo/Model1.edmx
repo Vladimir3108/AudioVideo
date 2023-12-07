@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="Хранилище VideoAudioSalonModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Applications">
+          <Key>
+            <PropertyRef Name="ApplicationID" />
+          </Key>
+          <Property Name="ApplicationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="CatalogID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DateOfApplication" Type="date" Nullable="false" />
+        </EntityType>
         <EntityType Name="Catalog">
           <Key>
             <PropertyRef Name="CatalogID" />
@@ -23,16 +33,6 @@
           </Key>
           <Property Name="RoleID" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Sale">
-          <Key>
-            <PropertyRef Name="SaleID" />
-          </Key>
-          <Property Name="SaleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="CatalogID" Type="int" Nullable="false" />
-          <Property Name="SumCheck" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="DateOfSale" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -76,25 +76,27 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Sale/Rental_Catalog">
-          <End Role="Catalog" Type="Self.Catalog" Multiplicity="1" />
-          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Catalog">
               <PropertyRef Name="CatalogID" />
             </Principal>
-            <Dependent Role="Sale">
+            <Dependent Role="Applications">
               <PropertyRef Name="CatalogID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Sale/Rental_Client">
           <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="Sale">
+            <Dependent Role="Applications">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
@@ -112,9 +114,9 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище VideoAudioSalonModelContainer">
+          <EntitySet Name="Applications" EntityType="Self.Applications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Catalog" EntityType="Self.Catalog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Sale" EntityType="Self.Sale" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TechniqueType" EntityType="Self.TechniqueType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
@@ -124,11 +126,11 @@
           </AssociationSet>
           <AssociationSet Name="FK_Sale/Rental_Catalog" Association="Self.FK_Sale/Rental_Catalog">
             <End Role="Catalog" EntitySet="Catalog" />
-            <End Role="Sale" EntitySet="Sale" />
+            <End Role="Applications" EntitySet="Applications" />
           </AssociationSet>
           <AssociationSet Name="FK_Sale/Rental_Client" Association="Self.FK_Sale/Rental_Client">
             <End Role="User" EntitySet="User" />
-            <End Role="Sale" EntitySet="Sale" />
+            <End Role="Applications" EntitySet="Applications" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
             <End Role="Role" EntitySet="Role" />
@@ -140,6 +142,18 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="VideoAudioSalonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Applications">
+          <Key>
+            <PropertyRef Name="ApplicationID" />
+          </Key>
+          <Property Name="ApplicationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="CatalogID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateOfApplication" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Catalog" Relationship="Self.FK_Sale_Rental_Catalog" FromRole="Applications" ToRole="Catalog" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Sale_Rental_Client" FromRole="Applications" ToRole="User" />
+        </EntityType>
         <EntityType Name="Catalog">
           <Key>
             <PropertyRef Name="CatalogID" />
@@ -151,8 +165,8 @@
           <Property Name="Amount" Type="Int32" Nullable="false" />
           <Property Name="SellingPrice" Type="Int32" Nullable="false" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Applications" Relationship="Self.FK_Sale_Rental_Catalog" FromRole="Catalog" ToRole="Applications" />
           <NavigationProperty Name="TechniqueType" Relationship="Self.FK_Catalog_TechniqueType" FromRole="Catalog" ToRole="TechniqueType" />
-          <NavigationProperty Name="Sale" Relationship="Self.FK_Sale_Rental_Catalog" FromRole="Catalog" ToRole="Sale" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -161,18 +175,6 @@
           <Property Name="RoleID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
-        </EntityType>
-        <EntityType Name="Sale">
-          <Key>
-            <PropertyRef Name="SaleID" />
-          </Key>
-          <Property Name="SaleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="CatalogID" Type="Int32" Nullable="false" />
-          <Property Name="SumCheck" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="DateOfSale" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Catalog" Relationship="Self.FK_Sale_Rental_Catalog" FromRole="Sale" ToRole="Catalog" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Sale_Rental_Client" FromRole="Sale" ToRole="User" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -203,9 +205,35 @@
           <Property Name="Login" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Applications" Relationship="Self.FK_Sale_Rental_Client" FromRole="User" ToRole="Applications" />
           <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
-          <NavigationProperty Name="Sale" Relationship="Self.FK_Sale_Rental_Client" FromRole="User" ToRole="Sale" />
         </EntityType>
+        <Association Name="FK_Sale_Rental_Catalog">
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="CatalogID" />
+            </Principal>
+            <Dependent Role="Applications">
+              <PropertyRef Name="CatalogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_Rental_Client">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Applications">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Catalog_TechniqueType">
           <End Role="TechniqueType" Type="Self.TechniqueType" Multiplicity="1" />
           <End Role="Catalog" Type="Self.Catalog" Multiplicity="*" />
@@ -215,18 +243,6 @@
             </Principal>
             <Dependent Role="Catalog">
               <PropertyRef Name="TechniqueTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Sale_Rental_Catalog">
-          <End Role="Catalog" Type="Self.Catalog" Multiplicity="1" />
-          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Catalog">
-              <PropertyRef Name="CatalogID" />
-            </Principal>
-            <Dependent Role="Sale">
-              <PropertyRef Name="CatalogID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -242,40 +258,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Sale_Rental_Client">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Sale">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="VideoAudioSalonEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Applications" EntityType="Self.Applications" />
           <EntitySet Name="Catalog" EntityType="Self.Catalog" />
           <EntitySet Name="Role" EntityType="Self.Role" />
-          <EntitySet Name="Sale" EntityType="Self.Sale" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TechniqueType" EntityType="Self.TechniqueType" />
           <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_Sale_Rental_Catalog" Association="Self.FK_Sale_Rental_Catalog">
+            <End Role="Catalog" EntitySet="Catalog" />
+            <End Role="Applications" EntitySet="Applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_Rental_Client" Association="Self.FK_Sale_Rental_Client">
+            <End Role="User" EntitySet="User" />
+            <End Role="Applications" EntitySet="Applications" />
+          </AssociationSet>
           <AssociationSet Name="FK_Catalog_TechniqueType" Association="Self.FK_Catalog_TechniqueType">
             <End Role="TechniqueType" EntitySet="TechniqueType" />
             <End Role="Catalog" EntitySet="Catalog" />
           </AssociationSet>
-          <AssociationSet Name="FK_Sale_Rental_Catalog" Association="Self.FK_Sale_Rental_Catalog">
-            <End Role="Catalog" EntitySet="Catalog" />
-            <End Role="Sale" EntitySet="Sale" />
-          </AssociationSet>
           <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
             <End Role="Role" EntitySet="Role" />
             <End Role="User" EntitySet="User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sale_Rental_Client" Association="Self.FK_Sale_Rental_Client">
-            <End Role="User" EntitySet="User" />
-            <End Role="Sale" EntitySet="Sale" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -284,6 +288,17 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище VideoAudioSalonModelContainer" CdmEntityContainer="VideoAudioSalonEntities">
+          <EntitySetMapping Name="Applications">
+            <EntityTypeMapping TypeName="VideoAudioSalonModel.Applications">
+              <MappingFragment StoreEntitySet="Applications">
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CatalogID" ColumnName="CatalogID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateOfApplication" ColumnName="DateOfApplication" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Catalog">
             <EntityTypeMapping TypeName="VideoAudioSalonModel.Catalog">
               <MappingFragment StoreEntitySet="Catalog">
@@ -302,17 +317,6 @@
               <MappingFragment StoreEntitySet="Role">
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sale">
-            <EntityTypeMapping TypeName="VideoAudioSalonModel.Sale">
-              <MappingFragment StoreEntitySet="Sale">
-                <ScalarProperty Name="SaleID" ColumnName="SaleID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="CatalogID" ColumnName="CatalogID" />
-                <ScalarProperty Name="SumCheck" ColumnName="SumCheck" />
-                <ScalarProperty Name="DateOfSale" ColumnName="DateOfSale" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

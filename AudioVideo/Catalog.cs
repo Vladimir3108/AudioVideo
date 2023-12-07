@@ -12,22 +12,24 @@ namespace AudioVideo
     using System;
     using System.Collections.Generic;
     using System.IO;
-    
+
     public partial class Catalog
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Catalog()
         {
-            this.Sale = new HashSet<Sale>();
+            this.Applications = new HashSet<Applications>();
         }
-    
+
         public int CatalogID { get; set; }
         public string Name { get; set; }
         public int TechniqueTypeID { get; set; }
-        public string TechniqueName { 
-            get {
+        public string TechniqueName
+        {
+            get
+            {
                 return TechniqueType.Type.ToString();
-            } 
+            }
         }
         public System.DateTime ReceiptDate { get; set; }
         public int Amount { get; set; }
@@ -48,15 +50,15 @@ namespace AudioVideo
             get
             {
                 if (App.CurrentUser == null)
-                    return "Hidden";                
+                    return "Hidden";
                 else if (App.CurrentUser.RoleID == 2)
                     return "Hidden";
                 else return "Visible";
             }
         }
-    
-        public virtual TechniqueType TechniqueType { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sale> Sale { get; set; }
+        public virtual ICollection<Applications> Applications { get; set; }
+        public virtual TechniqueType TechniqueType { get; set; }
     }
 }

@@ -22,18 +22,21 @@ namespace AudioVideo.Pages
     /// </summary>
     public partial class AddEditPage : Page
     {
-        Catalog catalog = new Catalog();
+        Catalog _catalog = new Catalog();
         private byte[] image = null;
-        public AddEditPage(Catalog _catalog)
+        public AddEditPage(Catalog correctCatalog)
         {
             InitializeComponent();
-            if (_catalog != null)
+
+            if (correctCatalog != null)
             {
-                catalog = _catalog;
+                _catalog = correctCatalog;
             }
-            DataContext = catalog;
+
+            DataContext = _catalog;
 
             ComboTech.ItemsSource = App.AudioSalon.TechniqueType.ToList();
+            
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
@@ -53,6 +56,8 @@ namespace AudioVideo.Pages
             {
                 image = File.ReadAllBytes(openFileDialog.FileName);
                 TechImage.Source = new ImageSourceConverter().ConvertFrom(image) as ImageSource;
+
+                _catalog.Image = image;
             }
         }
 
@@ -60,29 +65,14 @@ namespace AudioVideo.Pages
         {
             StringBuilder errors = new StringBuilder();
 
-            if (string.IsNullOrWhiteSpace(catalog.Name))
+            if (string.IsNullOrWhiteSpace(_catalog.Name))
                 errors.AppendLine("Введите название!");
 
-            if (catalog.TechniqueType == null)
+            if (_catalog.TechniqueType == null)
                 errors.AppendLine("Укажите тип техники!");
 
-            //if (string.IsNullOrWhiteSpace(_currentProduct.ProductDescription))
-            //    errors.AppendLine("Введите описание!");
-
-            //if (_currentProduct.ProductManufacter == null)
-            //    errors.AppendLine("Выберите производителя!");
-
-            //if (_currentProduct.ProductCategory == null)
-            //    errors.AppendLine("Выберите категорию!");
-
-            //if (_currentProduct.ProductCost <= 0)
-            //    errors.AppendLine("Введите цену!");
-
-            //if (_currentProduct.ProductDiscountAmount < 0)
-            //    errors.AppendLine("Введите скидку (если скидки нет - укажите 0)!");
-
-            //if (_currentProduct.ProductQuantityInStock < 0)
-            //    errors.AppendLine("Введите кол-во продукта (если продукта нет - укажите 0)!");
+            if (_catalog.Amount < 0)
+                errors.AppendLine("Укажите кол-во техники");
 
             if (errors.Length > 0)
             {
@@ -90,11 +80,12 @@ namespace AudioVideo.Pages
                 return;
             }
 
-
+            if (_catalog.CatalogID == 0)
+                App.AudioSalon.Catalog.Add(_catalog);
 
             try
             {
-                VideoAudioSalonEntities.GetContext().SaveChanges();
+                App.AudioSalon.SaveChanges();
                 MessageBox.Show("Информация сохранена!");
                 NavigationService.GoBack();
             }

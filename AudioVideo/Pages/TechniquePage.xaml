@@ -6,14 +6,24 @@
       xmlns:local="clr-namespace:AudioVideo.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="TechniquePage" IsVisibleChanged="Page_IsVisibleChanged">
+      Title="Каталог" IsVisibleChanged="Page_IsVisibleChanged">
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <ListView x:Name="ListTechnique">
+        <StackPanel Orientation="Horizontal" Background="{StaticResource ColorSecondary}">
+            <TextBox Margin="5" x:Name="TextSearch" Height="40" FontSize="27" Width="300" HorizontalAlignment="Right" TextChanged="TextSearch_TextChanged" VerticalAlignment="Top"/>
+            <ComboBox Margin="5" Height="40" x:Name="TextSort" FontSize="27" Width="300" HorizontalAlignment="Right" VerticalAlignment="Top" SelectionChanged="TextSort_SelectionChanged">
+                <ComboBoxItem Content="По умолчанию"/>
+                <ComboBoxItem Content="По возрастанию стоимости"/>
+                <ComboBoxItem Content="По убыванию стоимости"/>
+            </ComboBox>
+        </StackPanel>
+        
+        <ListView Grid.Row="1" x:Name="ListTechnique">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border>
@@ -32,15 +42,15 @@
                             <StackPanel Grid.Column="2">
                                 <Button x:Name="BtnEdit" Click="BtnEdit_Click" Content="Редактирование" Visibility="{Binding AdminVisibility}"/>
                                 <Button x:Name="BtnDelete" Click= "BtnDelete_Click"  Content="Удаление" Visibility="{Binding AdminVisibility}"/>
-                                
+                                <Button Name="BtnApp" Click="BtnApp_Click" Content="Заявка" Visibility="{Binding AdminVisibility}"/>
                             </StackPanel>
                         </Grid>
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Grid Grid.Row="1" Background="{StaticResource ColorAccent}"/>
-        <Button HorizontalAlignment="Left" Grid.Row="1" x:Name="BtnAdd" Click="BtnAdd_Click" Content="Добавление"/>
-        <Button HorizontalAlignment="Right" Grid.Row="1" x:Name="BtnBack" Click="BtnBack_Click" Content="Назад"/>
+        <Grid Grid.Row="2" Background="{StaticResource ColorAccent}"/>
+        <Button HorizontalAlignment="Left" Grid.Row="2" x:Name="BtnAdd" Click="BtnAdd_Click" Content="Добавление"/>
+        <Button HorizontalAlignment="Right" Grid.Row="2" x:Name="BtnBack" Click="BtnBack_Click" Content="Назад"/>
     </Grid>
 </Page>

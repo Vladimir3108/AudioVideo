@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AudioVideo"
         mc:Ignorable="d"
-        Title="Technique shop" Height="500" Width="800" MinHeight="500" MinWidth="800" WindowStartupLocation="CenterScreen">
+        Icon="Resources/shop.png"
+        Title="Магазин техники" Height="500" Width="800" MinHeight="500" MinWidth="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -14,5 +15,6 @@
         <Frame Grid.Row="1" x:Name="FrameMain" NavigationUIVisibility="Hidden"/>
         <Grid Background="{StaticResource ColorAccent}" />
         <Image Source="/Resources/Shop.png" HorizontalAlignment="Left"/>
+        <TextBlock Foreground="White" Text="{Binding ElementName=FrameMain, Path=Content.Title}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Window>

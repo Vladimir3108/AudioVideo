@@ -25,6 +25,7 @@ namespace AudioVideo.Pages
             
             InitializeComponent();
             update();
+            TextSort.SelectedIndex = 0;
             if (App.CurrentUser == null)
                 BtnAdd.Visibility = Visibility.Hidden;
             else if (App.CurrentUser.RoleID == 2)
@@ -37,6 +38,8 @@ namespace AudioVideo.Pages
             NavigationService.Navigate(new AddEditPage((sender as Button).DataContext as Catalog));
         }
 
+
+
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             var DelTech = (sender as Button).DataContext as Catalog;
@@ -48,9 +51,26 @@ namespace AudioVideo.Pages
             }
         }
 
-        private void update()
+        public void update()
         {
-            ListTechnique.ItemsSource = App.AudioSalon.Catalog.ToList();
+            var Tech = App.AudioSalon.Catalog.ToList();
+
+            Tech = Tech.Where(p => p.Name.ToLower().Contains(TextSearch.Text.ToLower())).ToList();
+
+            if (TextSort.SelectedIndex == 1)
+            {
+                Tech = Tech.OrderBy(p => p.SellingPrice).ToList();
+            }
+            else if(TextSort.SelectedIndex == 2)
+            {
+                Tech = Tech.OrderByDescending(p => p.SellingPrice).ToList();
+            }
+            else
+            {
+                Tech = Tech.ToList();
+            }
+
+            ListTechnique.ItemsSource = Tech;
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -70,9 +90,24 @@ namespace AudioVideo.Pages
         {
             if(Visibility == Visibility.Visible)
             {
-                VideoAudioSalonEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+                App.AudioSalon.ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
                 ListTechnique.ItemsSource = App.AudioSalon.Catalog.ToList();
             }
+        }
+
+        private void TextSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            update();
+        }
+
+        private void TextSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            update();
+        }
+
+        private void BtnApp_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ApplicationPage());
         }
     }
 }
