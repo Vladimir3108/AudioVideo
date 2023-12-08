@@ -109,5 +109,10 @@ namespace AudioVideo.Pages
         {
             NavigationService.Navigate(new ApplicationPage());
         }
+
+        private void BtnUserApp_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ApplicationUserPage((sender as Button).DataContext as Catalog));
+        }
     }
 }

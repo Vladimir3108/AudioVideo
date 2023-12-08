@@ -12,7 +12,7 @@ namespace AudioVideo
     using System;
     using System.Collections.Generic;
     using System.IO;
-
+    
     public partial class Catalog
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -52,6 +52,18 @@ namespace AudioVideo
                 if (App.CurrentUser == null)
                     return "Hidden";
                 else if (App.CurrentUser.RoleID == 2)
+                    return "Hidden";
+                else return "Visible";
+            }
+        }
+
+        public string UserVisibility
+        {
+            get
+            {
+                if (App.CurrentUser == null)
+                    return "Hidden";
+                else if (App.CurrentUser.RoleID == 1)
                     return "Hidden";
                 else return "Visible";
             }

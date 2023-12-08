@@ -43,6 +43,7 @@
                                 <Button x:Name="BtnEdit" Click="BtnEdit_Click" Content="Редактирование" Visibility="{Binding AdminVisibility}"/>
                                 <Button x:Name="BtnDelete" Click= "BtnDelete_Click"  Content="Удаление" Visibility="{Binding AdminVisibility}"/>
                                 <Button Name="BtnApp" Click="BtnApp_Click" Content="Заявка" Visibility="{Binding AdminVisibility}"/>
+                                <Button x:Name="BtnUserApp" Click="BtnUserApp_Click" Content="Оставить заявку" Visibility="{Binding UserVisibility}"/>
                             </StackPanel>
                         </Grid>
                     </Border>

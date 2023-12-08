@@ -19,17 +19,20 @@ namespace AudioVideo
         public int CatalogID { get; set; }
         public string Description { get; set; }
         public System.DateTime DateOfApplication { get; set; }
-    
-        public virtual Catalog Catalog { get; set; }
-        public virtual User User { get; set; }
-        
+        public bool Apply { get; set; }
         public string Technique
         {
             get { return Catalog.Name.ToString(); }
         }
-        public string Name { get 
+        public string Name
+        {
+            get
             {
                 return User.Name + " " + User.Patronymic;
-            } }
+            }
+        }
+
+        public virtual Catalog Catalog { get; set; }
+        public virtual User User { get; set; }
     }
 }

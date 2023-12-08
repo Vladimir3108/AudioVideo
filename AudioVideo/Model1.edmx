@@ -12,8 +12,9 @@
           <Property Name="ApplicationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="CatalogID" Type="int" Nullable="false" />
-          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="DateOfApplication" Type="date" Nullable="false" />
+          <Property Name="Apply" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Catalog">
           <Key>
@@ -149,8 +150,9 @@
           <Property Name="ApplicationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="CatalogID" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DateOfApplication" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Apply" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Catalog" Relationship="Self.FK_Sale_Rental_Catalog" FromRole="Applications" ToRole="Catalog" />
           <NavigationProperty Name="User" Relationship="Self.FK_Sale_Rental_Client" FromRole="Applications" ToRole="User" />
         </EntityType>
@@ -296,6 +298,7 @@
                 <ScalarProperty Name="CatalogID" ColumnName="CatalogID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="DateOfApplication" ColumnName="DateOfApplication" />
+                <ScalarProperty Name="Apply" ColumnName="Apply" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

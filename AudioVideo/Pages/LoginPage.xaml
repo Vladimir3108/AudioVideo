@@ -23,7 +23,7 @@
                 <PasswordBox Name="PBoxPassword" Width="325" Margin="5"></PasswordBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button x:Name="BtnGuest" Click="BtnGuest_Click" Content="Войти как гость"   />
+                <Button x:Name="BtnGuest" Click="BtnGuest_Click" Content="Войти как гость"/>
                 
                 <Button Name="BtnLogin" HorizontalContentAlignment="Center" Click="BtnLogin_Click" Content="Войти" />
             </StackPanel>

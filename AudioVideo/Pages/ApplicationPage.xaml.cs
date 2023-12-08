@@ -33,5 +33,10 @@ namespace AudioVideo.Pages
                 NavigationService.GoBack();
             }
         }
+
+        private void BtnApply_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ApplicationUserPage((sender as Button).DataContext as Applications));
+        }
     }
 }
