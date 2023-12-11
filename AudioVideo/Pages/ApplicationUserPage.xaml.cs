@@ -37,6 +37,8 @@ namespace AudioVideo.Pages
         public ApplicationUserPage(Applications correctApplication)
         {
             InitializeComponent();
+            _applications = correctApplication;
+            DataContext= _applications;
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
@@ -59,14 +61,16 @@ namespace AudioVideo.Pages
                 MessageBox.Show(stringBuilder.ToString());
                 return;
             }
-            var applications = new Applications
+            if(_catalog.CatalogID == 0)
             {
-                UserID = App.CurrentUser.UserID,
-                CatalogID = _catalog.CatalogID,
-                Description = TxtDescription.Text,
-                DateOfApplication= DateTime.Now.Date
-            };
-            App.AudioSalon.Applications.Add(applications);
+                var applications = new Applications
+                {
+                    UserID = App.CurrentUser.UserID,
+                    CatalogID = _catalog.CatalogID,
+                    Description = TxtDescription.Text
+                };
+                App.AudioSalon.Applications.Add(applications);
+            }
             App.AudioSalon.SaveChanges();
             MessageBox.Show("Заявка успешно создана");
             NavigationService.GoBack();

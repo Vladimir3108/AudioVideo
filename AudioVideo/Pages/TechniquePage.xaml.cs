@@ -26,11 +26,11 @@ namespace AudioVideo.Pages
             InitializeComponent();
             update();
             TextSort.SelectedIndex = 0;
-            if (App.CurrentUser == null)
+            if (App.CurrentUser == null || App.CurrentUser.RoleID == 2)
+            {
                 BtnAdd.Visibility = Visibility.Hidden;
-            else if (App.CurrentUser.RoleID == 2)
-                BtnAdd.Visibility = Visibility.Hidden;
-
+                BtnApp.Visibility = Visibility.Hidden;
+            }
         }
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)

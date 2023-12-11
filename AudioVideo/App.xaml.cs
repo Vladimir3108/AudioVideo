@@ -13,7 +13,7 @@ namespace AudioVideo
     /// </summary>
     public partial class App : Application
     {
-        public static VideoAudioSalonEntities AudioSalon { get; } = new VideoAudioSalonEntities();
+        public static VideoAudioSalonEntities1 AudioSalon { get; } = new VideoAudioSalonEntities1();
         public static User CurrentUser = null;
     }
 }

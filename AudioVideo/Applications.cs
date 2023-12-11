@@ -18,8 +18,8 @@ namespace AudioVideo
         public int UserID { get; set; }
         public int CatalogID { get; set; }
         public string Description { get; set; }
-        public System.DateTime DateOfApplication { get; set; }
         public bool Apply { get; set; }
+
         public string Technique
         {
             get { return Catalog.Name.ToString(); }
@@ -31,6 +31,8 @@ namespace AudioVideo
                 return User.Name + " " + User.Patronymic;
             }
         }
+
+
 
         public virtual Catalog Catalog { get; set; }
         public virtual User User { get; set; }

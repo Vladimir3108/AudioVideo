@@ -13,10 +13,10 @@ namespace AudioVideo
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class VideoAudioSalonEntities : DbContext
+    public partial class VideoAudioSalonEntities1 : DbContext
     {
-        public VideoAudioSalonEntities()
-            : base("name=VideoAudioSalonEntities")
+        public VideoAudioSalonEntities1()
+            : base("name=VideoAudioSalonEntities1")
         {
         }
     
@@ -28,7 +28,6 @@ namespace AudioVideo
         public virtual DbSet<Applications> Applications { get; set; }
         public virtual DbSet<Catalog> Catalog { get; set; }
         public virtual DbSet<Role> Role { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TechniqueType> TechniqueType { get; set; }
         public virtual DbSet<User> User { get; set; }
     }

@@ -13,7 +13,6 @@
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="CatalogID" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="DateOfApplication" Type="date" Nullable="false" />
           <Property Name="Apply" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Catalog">
@@ -34,16 +33,6 @@
           </Key>
           <Property Name="RoleID" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TechniqueType">
           <Key>
@@ -118,7 +107,6 @@
           <EntitySet Name="Applications" EntityType="Self.Applications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Catalog" EntityType="Self.Catalog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TechniqueType" EntityType="Self.TechniqueType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Catalog_TechniqueType" Association="Self.FK_Catalog_TechniqueType">
@@ -151,7 +139,6 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="CatalogID" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DateOfApplication" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Apply" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Catalog" Relationship="Self.FK_Sale_Rental_Catalog" FromRole="Applications" ToRole="Catalog" />
           <NavigationProperty Name="User" Relationship="Self.FK_Sale_Rental_Client" FromRole="Applications" ToRole="User" />
@@ -177,16 +164,6 @@
           <Property Name="RoleID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TechniqueType">
           <Key>
@@ -260,11 +237,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="VideoAudioSalonEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="VideoAudioSalonEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Applications" EntityType="Self.Applications" />
           <EntitySet Name="Catalog" EntityType="Self.Catalog" />
           <EntitySet Name="Role" EntityType="Self.Role" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TechniqueType" EntityType="Self.TechniqueType" />
           <EntitySet Name="User" EntityType="Self.User" />
           <AssociationSet Name="FK_Sale_Rental_Catalog" Association="Self.FK_Sale_Rental_Catalog">
@@ -289,7 +265,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище VideoAudioSalonModelContainer" CdmEntityContainer="VideoAudioSalonEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище VideoAudioSalonModelContainer" CdmEntityContainer="VideoAudioSalonEntities1">
           <EntitySetMapping Name="Applications">
             <EntityTypeMapping TypeName="VideoAudioSalonModel.Applications">
               <MappingFragment StoreEntitySet="Applications">
@@ -297,7 +273,6 @@
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="CatalogID" ColumnName="CatalogID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="DateOfApplication" ColumnName="DateOfApplication" />
                 <ScalarProperty Name="Apply" ColumnName="Apply" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -320,17 +295,6 @@
               <MappingFragment StoreEntitySet="Role">
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="VideoAudioSalonModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

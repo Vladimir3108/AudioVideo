@@ -103,9 +103,6 @@
     <Compile Include="Role.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="TechniqueType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

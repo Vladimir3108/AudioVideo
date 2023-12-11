@@ -12,7 +12,7 @@ namespace AudioVideo
     using System;
     using System.Collections.Generic;
     using System.IO;
-    
+
     public partial class Catalog
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

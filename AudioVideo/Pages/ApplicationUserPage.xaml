@@ -27,8 +27,8 @@
                 <TextBox x:Name="TxtDescription" Text="{Binding Description}" Width="250" Height="150" TextWrapping="Wrap"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Одобрение"/>
-                <CheckBox x:Name="ApplyChk" VerticalAlignment="Center" Margin="35 0 0 0 "/>
+                <TextBlock Text="Одобрение" Visibility="{Binding AdminVisibility}"/>
+                <CheckBox x:Name="ApplyChk" VerticalAlignment="Center" Margin="35 0 0 0 " Visibility="{Binding AdminVisibility}"/>
             </StackPanel>
         </StackPanel>
         
