@@ -11,7 +11,8 @@ namespace AudioVideo
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     public partial class Applications
     {
         public int ApplicationID { get; set; }
@@ -19,6 +20,7 @@ namespace AudioVideo
         public int CatalogID { get; set; }
         public string Description { get; set; }
         public bool Apply { get; set; }
+        public System.DateTime DateOfApplication { get; set; }
 
         public string Technique
         {
@@ -32,7 +34,23 @@ namespace AudioVideo
             }
         }
 
+        public string CatalogIDName
+        {
+            get
+            {
+                var catalogs = App.AudioSalon.Catalog.ToList();
+                var catalog = catalogs.Where(c => c.CatalogID == CatalogID).FirstOrDefault();
+                return catalog.Name;
+            }
+        }
 
+        public byte[] CorrectImage
+        {
+            get
+            {
+                return Catalog.CorrectImage;
+            }
+        }
 
         public virtual Catalog Catalog { get; set; }
         public virtual User User { get; set; }

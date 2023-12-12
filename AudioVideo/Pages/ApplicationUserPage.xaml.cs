@@ -25,13 +25,13 @@ namespace AudioVideo.Pages
         public ApplicationUserPage(Catalog correctCatalog)
         {
             InitializeComponent();
-            
-            if (correctCatalog != null )
+
+            if (correctCatalog != null)
             {
                 _catalog = correctCatalog;
             }
 
-            DataContext= _catalog;
+            DataContext = _catalog;
         }
 
         public ApplicationUserPage(Applications correctApplication)
@@ -61,18 +61,24 @@ namespace AudioVideo.Pages
                 MessageBox.Show(stringBuilder.ToString());
                 return;
             }
-            if(_catalog.CatalogID == 0)
+            if(_applications.ApplicationID == 0)
             {
-                var applications = new Applications
-                {
-                    UserID = App.CurrentUser.UserID,
-                    CatalogID = _catalog.CatalogID,
-                    Description = TxtDescription.Text
-                };
-                App.AudioSalon.Applications.Add(applications);
+                //var applications = new Applications
+                //{
+                //    UserID = App.CurrentUser.UserID,
+                //    CatalogID = _catalog.CatalogID,
+                //    Description = TxtDescription.Text
+                //};
+                App.AudioSalon.Applications.Add(_applications);
+                App.AudioSalon.SaveChanges();
+                MessageBox.Show("Заявка успешно создана");
             }
-            App.AudioSalon.SaveChanges();
-            MessageBox.Show("Заявка успешно создана");
+            else
+            {
+                App.AudioSalon.SaveChanges();
+                MessageBox.Show("Заявка успешно отредактирована");
+            }
+            
             NavigationService.GoBack();
         }
     }

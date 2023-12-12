@@ -33,7 +33,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Width="119" Text="Дата поставки"/>
-                <DatePicker  SelectedDate="{Binding ReceiptDate}" Name="datePeacker"/>
+                <DatePicker SelectedDate="{Binding ReceiptDate}" Name="datePeacker"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Width="115" Text="Количество"/>

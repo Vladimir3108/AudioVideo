@@ -20,10 +20,15 @@ namespace AudioVideo
         {
             this.Applications = new HashSet<Applications>();
         }
-
+    
         public int CatalogID { get; set; }
         public string Name { get; set; }
         public int TechniqueTypeID { get; set; }
+        public System.DateTime ReceiptDate { get; set; }
+        public int Amount { get; set; }
+        public int SellingPrice { get; set; }
+        public byte[] Image { get; set; }
+
         public string TechniqueName
         {
             get
@@ -31,10 +36,8 @@ namespace AudioVideo
                 return TechniqueType.Type.ToString();
             }
         }
-        public System.DateTime ReceiptDate { get; set; }
-        public int Amount { get; set; }
-        public int SellingPrice { get; set; }
-        public byte[] Image { get; set; }
+
+
         public byte[] CorrectImage
         {
             get

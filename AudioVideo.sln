@@ -5,6 +5,10 @@ VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioVideo", "AudioVideo\AudioVideo.csproj", "{145E1C8E-CE01-4C00-A2B5-9AADEF8743B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary", "ClassLibrary\ClassLibrary.csproj", "{16693660-2717-4675-8F73-972232E347E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibraryTests", "ClassLibraryTests\ClassLibraryTests.csproj", "{5498212C-DB80-4285-A05F-5DDCA7CF117D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{145E1C8E-CE01-4C00-A2B5-9AADEF8743B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{145E1C8E-CE01-4C00-A2B5-9AADEF8743B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{145E1C8E-CE01-4C00-A2B5-9AADEF8743B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16693660-2717-4675-8F73-972232E347E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16693660-2717-4675-8F73-972232E347E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16693660-2717-4675-8F73-972232E347E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16693660-2717-4675-8F73-972232E347E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5498212C-DB80-4285-A05F-5DDCA7CF117D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5498212C-DB80-4285-A05F-5DDCA7CF117D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5498212C-DB80-4285-A05F-5DDCA7CF117D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5498212C-DB80-4285-A05F-5DDCA7CF117D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
