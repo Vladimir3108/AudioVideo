@@ -33,7 +33,7 @@
                 <CheckBox x:Name="ApplyChk" VerticalAlignment="Center" Margin="35 0 0 0 " Visibility="{Binding AdminVisibility}" IsChecked="{Binding Apply}"/>
             </StackPanel>
         </StackPanel>
-        <DatePicker SelectedDate="{Binding DateOfApplication}" Visibility="Hidden"></DatePicker> 
+        <DatePicker Name="DateNow" SelectedDate="{Binding DateOfApplication}" Visibility="Hidden"></DatePicker> 
         <Grid  Grid.Row="1" Background="{StaticResource ColorAccent}"/>
         <Button HorizontalAlignment="Right" Grid.Row="1" x:Name="BtnBack" Click="BtnBack_Click" Content="Назад"/>
         <Button x:Name="BtnSend" Click="BtnSend_Click" Content="Отправить" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="1"/>

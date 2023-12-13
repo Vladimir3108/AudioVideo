@@ -43,5 +43,13 @@ namespace ClassLibrary.Tests
             bool actual = UserTest.ValidateBack(click_on);
             Assert.IsTrue(actual);
         }
+
+        [TestMethod()]
+        public void ValidateValueTest()
+        {
+            string Value = "value";
+            bool actual = UserTest.ValidateValue(Value);
+            Assert.IsFalse(actual);
+        }
     }
 }

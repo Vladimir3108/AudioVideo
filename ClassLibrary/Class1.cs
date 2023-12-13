@@ -23,5 +23,11 @@ namespace ClassLibrary
             }
             return false;
         }
+        public static bool ValidateValue(string value)
+        {
+            if(!int.TryParse(value, out var result))
+                return false;
+            else return true;
+        }
     }
 }
