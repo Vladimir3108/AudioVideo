@@ -23,6 +23,7 @@ namespace AudioVideo.Pages
         public LoginPage()
         {
             InitializeComponent();
+            App.CurrentUser = null;
         }
 
 
